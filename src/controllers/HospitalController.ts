@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
-import { getRepository } from "typeorm";
 import { Hospital } from "../models/Hospital";
+import { AppDataSource } from "../data-source";
 
 class HospitalController {
   static listAll: RequestHandler = async (req, res, next) => {
     try {
-      const hospitalRepository = getRepository(Hospital);
+      const hospitalRepository = AppDataSource.getRepository(Hospital);
       const hospitais = await hospitalRepository.find();
       res.json(hospitais);
     } catch (error) {
@@ -16,7 +16,7 @@ class HospitalController {
   static getOneById: RequestHandler = async (req, res, next) => {
     try {
       const id = parseInt(req.params.id, 10);
-      const hospitalRepository = getRepository(Hospital);
+      const hospitalRepository = AppDataSource.getRepository(Hospital);
       const hospital = await hospitalRepository.findOne({ where: { id } });
 
       if (!hospital) {

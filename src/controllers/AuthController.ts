@@ -4,6 +4,7 @@ import { getRepository } from "typeorm";
 import { User } from "../models/User";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
+import { AppDataSource } from "../data-source";
 
 class AuthController {
   static register: RequestHandler = async (req, res, next) => {
@@ -15,7 +16,7 @@ class AuthController {
         return;
       }
 
-      const userRepository = getRepository(User);
+      const userRepository = AppDataSource.getRepository(User);
       const userExists = await userRepository.findOne({ where: { email } });
 
       if (userExists) {
@@ -48,7 +49,7 @@ class AuthController {
         return;
       }
 
-      const userRepository = getRepository(User);
+      const userRepository = AppDataSource.getRepository(User);
       const user = await userRepository.findOne({ where: { email } });
 
       if (!user) {
