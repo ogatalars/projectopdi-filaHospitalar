@@ -9,4 +9,5 @@ router.use("/auth", authRoutes);
 router.use("/hospitais", hospitalRoutes);
 router.use("/filas", queueRoutes);
 
+
 export default router;
