@@ -27,20 +27,19 @@
       </form>
     </div>
 
-    <!-- Scripts -->
+    <!-- public/login.html -->
     <script>
       document
         .getElementById("loginForm")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
+
           const email = document.getElementById("email").value;
           const senha = document.getElementById("senha").value;
 
           const response = await fetch("/auth/login", {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, senha }),
           });
 
@@ -48,9 +47,10 @@
 
           if (response.ok) {
             localStorage.setItem("token", result.token);
-            window.location.href = "/";
+
+            window.location.href = "/profile.html";
           } else {
-            alert(result.message);
+            alert("Erro: " + result.message);
           }
         });
     </script>

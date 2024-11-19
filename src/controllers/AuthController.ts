@@ -1,6 +1,5 @@
 // src/controllers/AuthController.ts
 import { Request, Response, NextFunction, RequestHandler } from "express";
-import { getRepository } from "typeorm";
 import { User } from "../models/User";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
@@ -64,19 +63,14 @@ class AuthController {
         return;
       }
 
-      if (validPassword) {
-        const token = jwt.sign(
-          { userId: user.id, email: user.email },
-          process.env.JWT_SECRET || "jwt_secret",
-          { expiresIn: "1h" }
-        );
+      const token = jwt.sign(
+        { userId: user.id, email: user.email },
+        process.env.JWT_SECRET || "jwt_secret",
+        { expiresIn: "1h" }
+      );
 
-        res.status(200).json({ message: "Login realizado com sucesso", token });
-      } else {
-        res.status(401).json({ message: "Credenciais inválidas" });
-      }
-
-      res.status(200).json({ message: "Login realizado com sucesso" });
+      res.status(200).json({ message: "Login realizado com sucesso", token });
+      return;
     } catch (error) {
       next(error);
     }
