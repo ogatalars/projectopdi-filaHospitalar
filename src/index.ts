@@ -1,27 +1,22 @@
-import express from "express";
+// src/index.ts
 import "reflect-metadata";
-import { createConnection } from "typeorm";
-import { errorHandler } from "./middleware/errorHandle";
-import path from "path";
+import * as dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
+import { AppDataSource } from "./data-source";
+import routes from "./routes";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-
-import routes from "./routes";
 app.use("/", routes);
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
-app.use(errorHandler);
-app.use(express.static(path.join(__dirname, "../public")));
-
-createConnection()
+AppDataSource.initialize()
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Servidor rodando na porta ${PORT}`);
     });
   })
-  .catch((error) => console.log(error));
+  .catch((error) => console.log("Erro ao inicializar o Data Source", error));

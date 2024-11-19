@@ -1,10 +1,11 @@
 {
   "type": "postgres",
-  "host": "localhost",
-  "port": 5432,
-  "username": "seu_usuario",
-  "password": "sua_senha",
-  "database": "fila_hospitalar",
-  "entities": ["dist/models/**/*.js"],
-  "synchronize": true
+  "host": "${DB_HOST}",
+  "port": "${DB_PORT}",
+  "username": "${DB_USERNAME}",
+  "password": "${DB_PASSWORD}",
+  "database": "${DB_DATABASE}",
+  "entities": ["src/models/**/*.{ts,js}", "dist/models/**/*.{ts,js}"],
+  "synchronize": true,
+  "logging": true
 }
