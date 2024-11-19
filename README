@@ -1,5 +1,7 @@
-# 3.1. Instalação e Configuração
-Passo 1: Clonar o Repositório
+# Disclaimer: essa parte é toda feita para a web. Seguiremos com outro repo para a parte especifica para aplicativos android (feita em react native)
+
+# 1. Instalação e Configuração
+# Passo 1: Clonar o Repositório
 
 
 git clone https://github.com/seu-usuario/filaHospitalar.git
