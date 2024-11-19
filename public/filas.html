@@ -1,0 +1,88 @@
+<!-- public/filas.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Filas - Fila Hospitalar</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Fila Hospitalar</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="hospitais.html">Hospitais</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="logout">Sair</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h2>Filas do Hospital</h2>
+      <div id="filas-list"></div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("Você precisa estar logado para acessar esta página.");
+        window.location.href = "/login.html";
+      } else {
+        // Obter o ID do hospital da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const hospitalId = urlParams.get("hospitalId");
+
+        fetch(`/filas/${hospitalId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const filasList = document.getElementById("filas-list");
+            if (data.length > 0) {
+              data.forEach((fila) => {
+                const filaCard = document.createElement("div");
+                filaCard.classList.add("card", "mb-3");
+                filaCard.innerHTML = `
+              <div class="card-body">
+                <h5 class="card-title">Tempo de Espera: ${fila.tempoEspera} minutos</h5>
+                <p class="card-text">Pacientes na Fila: ${fila.pacientesNaFila}</p>
+              </div>
+            `;
+                filasList.appendChild(filaCard);
+              });
+            } else {
+              filasList.innerHTML =
+                "<p>Nenhuma fila encontrada para este hospital.</p>";
+            }
+          })
+          .catch((error) => {
+            console.error("Erro ao obter filas:", error);
+            alert("Erro ao obter filas.");
+          });
+      }
+
+      // Função de logout
+      document.getElementById("logout").addEventListener("click", () => {
+        localStorage.removeItem("token");
+        window.location.href = "/login.html";
+      });
+    </script>
+  </body>
+</html>

@@ -3,6 +3,7 @@ import { Request, Response, NextFunction, RequestHandler } from "express";
 import { getRepository } from "typeorm";
 import { User } from "../models/User";
 import * as bcrypt from "bcryptjs";
+import * as jwt from "jsonwebtoken";
 
 class AuthController {
   static register: RequestHandler = async (req, res, next) => {
@@ -62,7 +63,17 @@ class AuthController {
         return;
       }
 
-      // Aqui você pode gerar um token JWT se desejar
+      if (validPassword) {
+        const token = jwt.sign(
+          { userId: user.id, email: user.email },
+          process.env.JWT_SECRET || "jwt_secret",
+          { expiresIn: "1h" }
+        );
+
+        res.status(200).json({ message: "Login realizado com sucesso", token });
+      } else {
+        res.status(401).json({ message: "Credenciais inválidas" });
+      }
 
       res.status(200).json({ message: "Login realizado com sucesso" });
     } catch (error) {
