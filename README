@@ -1,0 +1,110 @@
+3.1. Instalação e Configuração
+Passo 1: Clonar o Repositório
+
+bash
+Copiar código
+git clone https://github.com/seu-usuario/filaHospitalar.git
+Passo 2: Instalar as Dependências
+
+No diretório raiz do projeto, execute:
+
+bash
+Copiar código
+npm install
+Passo 3: Configurar o Banco de Dados
+
+Certifique-se de que o PostgreSQL está instalado e em execução.
+Crie um banco de dados chamado fila_hospitalar.
+Crie um usuário com acesso ao banco de dados:
+sql
+Copiar código
+CREATE USER fila_user WITH PASSWORD 'sua_senha';
+CREATE DATABASE fila_hospitalar OWNER fila_user;
+GRANT ALL PRIVILEGES ON DATABASE fila_hospitalar TO fila_user;
+Passo 4: Configurar Variáveis de Ambiente
+
+Crie um arquivo .env na raiz do projeto com o seguinte conteúdo:
+
+makefile
+Copiar código
+PORT=3000
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=fila_user
+DB_PASSWORD=sua_senha
+DB_DATABASE=fila_hospitalar
+JWT_SECRET=sua_chave_secreta
+Substitua sua_senha e sua_chave_secreta pelas suas credenciais.
+
+3.2. Executando o Projeto
+Modo de Desenvolvimento
+
+Use o seguinte comando para iniciar o servidor em modo de desenvolvimento:
+
+bash
+Copiar código
+npm run dev
+Isso usará o nodemon para reiniciar o servidor automaticamente quando houver alterações.
+
+Modo de Produção
+
+Compile o projeto e inicie o servidor:
+
+bash
+Copiar código
+npm run build
+npm start
+3.3. Usando a Aplicação
+Acessar a Aplicação
+
+Abra o navegador e acesse:
+
+arduino
+Copiar código
+http://localhost:3000/
+Registrar um Usuário
+
+Acesse http://localhost:3000/register.html.
+Preencha os campos e clique em "Cadastrar".
+Fazer Login
+
+Acesse http://localhost:3000/login.html.
+Insira suas credenciais e clique em "Entrar".
+Visualizar Hospitais
+
+Após o login, acesse http://localhost:3000/hospitais.html.
+Visualize a lista de hospitais disponíveis.
+Visualizar Filas
+
+Na página de hospitais, clique em "Ver Filas" para ver as filas de um hospital específico.
+Editar Perfil
+
+Acesse http://localhost:3000/profile.html.
+Edite seu nome ou senha e clique em "Atualizar".
+Deletar Conta
+
+Na página de perfil, clique em "Deletar Conta".
+Confirme a ação na janela de confirmação.
+Logout
+
+Clique em "Sair" no menu de navegação para encerrar a sessão.
+3.4. Considerações de Segurança
+Senhas e Tokens: As senhas são criptografadas usando bcryptjs. Tokens JWT são usados para autenticação.
+Proteção de Rotas: Rotas que requerem autenticação estão protegidas pelo middleware checkJwt.
+Variáveis de Ambiente: Nunca exponha suas variáveis de ambiente ou credenciais em repositórios públicos.
+3.5. Dependências Principais
+Back-end:
+
+Node.js
+Express.js
+TypeScript
+TypeORM
+PostgreSQL
+bcryptjs
+jsonwebtoken
+Front-end:
+
+HTML5
+CSS3
+JavaScript
+Bootstrap 5
