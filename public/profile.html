@@ -42,7 +42,6 @@
         alert("Você precisa estar logado para acessar esta página.");
         window.location.href = "/login.html";
       } else {
-        // Carregar dados do perfil
         fetch("/user/profile", {
           headers: {
             "Content-Type": "application/json",
@@ -123,7 +122,6 @@
             }
           });
 
-        // Logout
         document.getElementById("logout").addEventListener("click", () => {
           localStorage.removeItem("token");
           window.location.href = "/login.html";
