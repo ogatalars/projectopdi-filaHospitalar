@@ -64,10 +64,11 @@
 
             const result = await response.json();
 
-            <!-- Dentro do script de login em login.html -->
             if (response.ok) {
               localStorage.setItem("token", result.token);
+              alert("Login realizado com sucesso!");
               window.location.href = "/profile.html";
+            } else {
               alert("Erro: " + result.message);
             }
           } catch (error) {

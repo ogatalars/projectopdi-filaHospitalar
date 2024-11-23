@@ -5,7 +5,6 @@ import { User } from "../models/User";
 import * as bcrypt from "bcryptjs";
 
 class UserController {
-  // Método para obter os dados do perfil do usuário
   static getProfile = async (
     req: Request,
     res: Response,
@@ -27,7 +26,6 @@ class UserController {
     }
   };
 
-  // Método para atualizar os dados do usuário
   static updateProfile = async (
     req: Request,
     res: Response,
@@ -59,7 +57,6 @@ class UserController {
     }
   };
 
-  // Método para deletar a conta do usuário
   static deleteAccount = async (
     req: Request,
     res: Response,

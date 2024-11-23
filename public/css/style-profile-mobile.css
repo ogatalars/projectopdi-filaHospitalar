@@ -1,0 +1,54 @@
+
+.container h2 {
+  font-size: 24px;
+}
+
+.container-input input {
+  font-size: 16px;
+}
+
+.container-input button,
+.btn-delete {
+  font-size: 16px;
+}
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .nav-links li {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .nav-links li a {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    font-size: 16px;
+  }
+
+  .edit-form input,
+  .edit-form button,
+  .history button {
+    font-size: 16px;
+  }
+
+  .history ul li {
+    font-size: 14px;
+  }
+}

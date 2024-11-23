@@ -4,8 +4,12 @@ import { Queue } from "../models/Queue";
 import { AppDataSource } from "../data-source";
 
 class QueueController {
-  static getQueuesByHospital(arg0: string, arg1: ((req: Request, res: Response, next: NextFunction) => void)[], getQueuesByHospital: any) {
-      throw new Error("Method not implemented.");
+  static getQueuesByHospital(
+    arg0: string,
+    arg1: ((req: Request, res: Response, next: NextFunction) => void)[],
+    getQueuesByHospital: any
+  ) {
+    throw new Error("Method not implemented.");
   }
   static getByHospitalId: RequestHandler = async (req, res, next) => {
     try {
@@ -21,8 +25,6 @@ class QueueController {
       next(error);
     }
   };
-
-  // Métodos para atualizar as informações da fila podem ser adicionados aqui
 }
 
 export default QueueController;
