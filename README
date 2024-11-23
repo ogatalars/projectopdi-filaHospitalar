@@ -1,18 +1,18 @@
-# Disclaimer: essa parte é toda feita para a web. Seguiremos com outro repo para a parte especifica para aplicativos android (feita em react native)
+### Disclaimer: essa parte é toda feita para a web. Seguiremos com outro repo para a parte especifica para aplicativos android (feita em react native)
 
-# 1. Instalação e Configuração
-# Passo 1: Clonar o Repositório
+### 1. Instalação e Configuração
+### Passo 1: Clonar o Repositório
 
 
 git clone https://github.com/seu-usuario/filaHospitalar.git
 
-# Passo 2: Instalar as Dependências
+### Passo 2: Instalar as Dependências
 
 No diretório raiz do projeto, execute:
 
 
 npm install
-# Passo 3: Configurar o Banco de Dados
+### Passo 3: Configurar o Banco de Dados
 
 Certifique-se de que o PostgreSQL está instalado e em execução.
 Crie um banco de dados chamado fila_hospitalar.
@@ -36,7 +36,7 @@ DB_DATABASE=fila_hospitalar
 JWT_SECRET=sua_chave_secreta
 Substitua sua_senha e sua_chave_secreta pelas suas credenciais.
 
-# 3.2. Executando o Projeto
+### 3.2. Executando o Projeto
 Modo de Desenvolvimento
 
 Use o seguinte comando para iniciar o servidor em modo de desenvolvimento:
@@ -54,7 +54,7 @@ npm run build
 npm start
 
 
-# 3.3. Usando a Aplicação
+### 3.3. Usando a Aplicação
 Acessar a Aplicação
 
 Abra o navegador e acesse:
@@ -89,12 +89,13 @@ Logout
 
 Clique em "Sair" no menu de navegação para encerrar a sessão.
 
-# 3.4. Considerações de Segurança
+### 3.4. Considerações de Segurança
 Senhas e Tokens: As senhas são criptografadas usando bcryptjs. Tokens JWT são usados para autenticação.
 Proteção de Rotas: Rotas que requerem autenticação estão protegidas pelo middleware checkJwt.
 Variáveis de Ambiente: Nunca exponha suas variáveis de ambiente ou credenciais em repositórios públicos.
 3.5. Dependências Principais
-Back-end:
+
+- Back-end:
 
 Node.js
 Express.js
@@ -103,7 +104,8 @@ TypeORM
 PostgreSQL
 bcryptjs
 jsonwebtoken
-Front-end:
+
+- Front-end:
 
 HTML5
 CSS3

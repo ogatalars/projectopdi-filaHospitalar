@@ -1,0 +1,193 @@
+/* style-profile.css */
+
+/* Estilos gerais */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container principal */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Título */
+.container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Formulário */
+.container-input {
+  margin-bottom: 20px;
+}
+
+.container-input input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.container-input button {
+  width: 100%;
+  padding: 10px;
+}
+
+/* Botão Deletar Conta */
+.btn-delete {
+  width: 100%;
+  padding: 10px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0066cc; /* Cor de fundo */
+  padding: 10px 20px;
+}
+
+.container-logo {
+  display: flex;
+  align-items: center;
+}
+
+.container-logo .foto {
+  width: 40px;
+  height: 40px;
+  background-image: url("https://via.placeholder.com/40");
+  background-size: cover;
+  background-position: center;
+  margin-right: 10px;
+}
+
+.container-logo .texto {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-links li a:hover {
+  text-decoration: underline;
+}
+
+.user-info {
+  background-color: #f0f0f0;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.user-info p {
+  margin: 5px 0;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.action-buttons button {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #0066cc;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.action-buttons button:hover {
+  background-color: #005bb5;
+}
+
+.edit-form {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.edit-form h3 {
+  margin-top: 0;
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.edit-form button {
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.history {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.history h3 {
+  margin-top: 0;
+}
+
+.history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history ul li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.history button {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.btn-delete {
+  width: 100%;
+  padding: 10px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: darkred;
+}

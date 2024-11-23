@@ -1,0 +1,76 @@
+/* Estilos padrão (mobile-first) */
+
+.container-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+input {
+  width: 80%; 
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+button {
+  width: 80%; 
+  padding: 12px;
+  border: none;
+  background-color: #007aff;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.redefinir {
+  width: 80%;
+  text-align: center;
+  padding-top: 12px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.158);
+  padding-bottom: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #007aff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+p {
+  font-size: 16px;
+}
+
+.container-cadastro {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.container-cadastro p {
+  font-size: 16px;
+}
+
+.container-cadastro span {
+  color: #007aff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 768px) {
+  input {
+    width: 30%;
+  }
+
+  button {
+    width: 30%;
+  }
+
+  .redefinir {
+    width: 30%;
+  }
+}

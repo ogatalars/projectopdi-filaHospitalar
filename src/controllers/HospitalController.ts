@@ -29,8 +29,6 @@ class HospitalController {
       next(error);
     }
   };
-
-  // Métodos para criar, atualizar e deletar hospitais podem ser adicionados aqui
 }
 
 export default HospitalController;

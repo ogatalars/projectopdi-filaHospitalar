@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@media screen and (max-width: 580px) {
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Roboto", sans-serif;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+    }
+    
+    .container-logo {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .foto {
+        background: url(/img/41c404d9de753f40e0539dd92af0015f.png);
+        background-position: center;
+        background-size: 100%;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .texto {
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    h1 {
+        color: #007AFF;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        font-size: 35px;
+    }
+
+    .container-button {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+    }
+
+    p {
+        color:#999999;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        cursor: pointer;
+        padding: 12px;
+        margin-bottom: 8px;
+        background-color:#007AFF;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        font-size: 18px;
+    }
+
+    button:hover {
+        background-color: #1c88fc;
+    }
+
+    button.cadastro {
+        background-color: #81c435;
+    }
+
+    button.cadastro:hover {
+        background-color: #90c456;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+}

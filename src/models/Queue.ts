@@ -8,7 +8,7 @@ export class Queue {
   id!: number;
 
   @Column()
-  tempoEspera!: number; // Em minutos
+  tempoEspera!: number;
 
   @Column()
   pacientesNaFila!: number;
