@@ -58,8 +58,14 @@ class AuthController {
 
       const validPassword = await bcrypt.compare(senha, user.senha);
 
-      if (!validPassword) {
-        res.status(401).json({ message: "Credenciais inválidas" });
+      if (validPassword) {
+        const token = jwt.sign(
+          { userId: user.id, email: user.email },
+          process.env.JWT_SECRET || "jwt_secret",
+          { expiresIn: "1h" }
+        );
+
+        res.status(200).json({ message: "Login realizado com sucesso", token });
         return;
       }
 

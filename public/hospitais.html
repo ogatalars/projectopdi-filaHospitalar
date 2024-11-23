@@ -4,7 +4,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>Hospitais - Fila Hospitalar</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/style-index-mobile.css" />
+    <link rel="stylesheet" href="css/style-login-mobile.css" />
+    <link rel="stylesheet" href="css/style-local-mobile.css" />
+    <link rel="stylesheet" href="css/style-index.css" />
+    <link rel="stylesheet" href="css/style-login.css" />
+    <link rel="stylesheet" href="css/style-local.css" />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -13,100 +18,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Fila Hospitalar</a>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="hospitais.html">Hospitais</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="profile.html">Perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="logout">Sair</a>
-          </li>
-        </ul>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container-logo">
+        <div class="foto"></div>
+        <div class="texto">Fila Hospitalar</div>
       </div>
+      <ul class="nav-links">
+        <li><a href="profile.html">Perfil</a></li>
+        <li><a href="#" id="logout">Sair</a></li>
+      </ul>
     </nav>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Fila Hospitalar</a>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="hospitais.html">Hospitais</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="profile.html">Perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="logout">Sair</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div class="container">
+      <p>Escolha o seu local de atendimento</p>
 
-    <div class="container mt-5">
-      <h2>Lista de Hospitais</h2>
+      <div class="container-input">
+        <input type="text" id="estado" placeholder="Estado" />
+        <input type="text" id="cidade" placeholder="Cidade" />
+        <input type="text" id="hospital" placeholder="Hospital" />
+        <button id="btnPesquisar">Pesquisar</button>
+      </div>
+
       <div id="hospitais-list"></div>
     </div>
 
-    <!-- Scripts -->
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script para listar hospitais -->
     <script>
-      // Verificar se o usuário está autenticado
       const token = localStorage.getItem("token");
 
       if (!token) {
         alert("Você precisa estar logado para acessar esta página.");
         window.location.href = "/login.html";
       } else {
-        // Buscar a lista de hospitais
-        fetch("/hospitais", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            const hospitaisList = document.getElementById("hospitais-list");
-            if (data.length > 0) {
-              data.forEach((hospital) => {
-                const hospitalCard = document.createElement("div");
-                hospitalCard.classList.add("card", "mb-3");
-                hospitalCard.innerHTML = `
-            <div class="card-body">
-              <h5 class="card-title">${hospital.nome}</h5>
-              <p class="card-text">${hospital.endereco}</p>
-              <p class="card-text">Telefone: ${hospital.telefone}</p>
-              <a href="#" class="btn btn-primary" onclick="verFilas(${hospital.id})">Ver Filas</a>
-            </div>
-          `;
-                hospitaisList.appendChild(hospitalCard);
-              });
-            } else {
-              hospitaisList.innerHTML = "<p>Nenhum hospital encontrado.</p>";
-            }
-          })
-          .catch((error) => {
-            console.error("Erro ao obter hospitais:", error);
-            alert("Erro ao obter hospitais.");
+        document.addEventListener("DOMContentLoaded", () => {
+          fetchHospitais();
+        });
+
+        document
+          .getElementById("btnPesquisar")
+          .addEventListener("click", () => {
+            fetchHospitais();
           });
-      }
 
-      // Função para redirecionar para a página de filas do hospital
-      function verFilas(hospitalId) {
-        window.location.href = `/filas.html?hospitalId=${hospitalId}`;
-      }
+        function fetchHospitais() {
+          const estado = document.getElementById("estado").value;
+          const cidade = document.getElementById("cidade").value;
+          const hospitalNome = document.getElementById("hospital").value;
 
-      // Função de logout
-      document.getElementById("logout").addEventListener("click", () => {
-        localStorage.removeItem("token");
-        window.location.href = "/login.html";
-      });
+          let url = "/hospitais";
+          const params = new URLSearchParams();
+          if (estado) params.append("estado", estado);
+          if (cidade) params.append("cidade", cidade);
+          if (hospitalNome) params.append("nome", hospitalNome);
+          if (params.toString()) url += "?" + params.toString();
+
+          fetch(url, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              const hospitaisList = document.getElementById("hospitais-list");
+              hospitaisList.innerHTML = "";
+
+              if (data.length > 0) {
+                data.forEach((hospital) => {
+                  const hospitalCard = document.createElement("div");
+                  hospitalCard.classList.add("hospital-card");
+                  hospitalCard.innerHTML = `
+                  <h5>${hospital.nome}</h5>
+                  <p>${hospital.endereco}</p>
+                  <button onclick="verFilas(${hospital.id})">Ver Filas</button>
+                `;
+                  hospitaisList.appendChild(hospitalCard);
+                });
+              } else {
+                hospitaisList.innerHTML = "<p>Nenhum hospital encontrado.</p>";
+              }
+            })
+            .catch((error) => {
+              console.error("Erro ao obter hospitais:", error);
+              alert("Erro ao obter hospitais.");
+            });
+        }
+
+        function verFilas(hospitalId) {
+          window.location.href = `/filas.html?hospitalId=${hospitalId}`;
+        }
+
+        // Logout
+        document.getElementById("logout").addEventListener("click", () => {
+          localStorage.removeItem("token");
+          window.location.href = "/login.html";
+        });
+      }
     </script>
   </body>
 </html>
