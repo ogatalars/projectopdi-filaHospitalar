@@ -1,4 +1,4 @@
-### Disclaimer: Utilizamos Typescript tanto para back-end quanto para front-end. A aplicação web está está seguindo os passos abaixo. Utilizamos EXPO para fazer a aplicação Android,
+### Disclaimer: Utilizamos Typescript tanto para back-end quanto para front-end. A aplicação web está seguindo os passos abaixo. Por hora, utilizamos EXPO para fazer a aplicação Android,
 que é a pasta filaHospitalarApp
 
 ### 1. Instalação e Configuração
