@@ -1,4 +1,3 @@
-// src/models/Queue.ts
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Hospital } from "./Hospital";
 
