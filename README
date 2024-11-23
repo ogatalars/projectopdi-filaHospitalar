@@ -1,114 +1,204 @@
 ### Disclaimer: Utilizamos Typescript tanto para back-end quanto para front-end. A aplicação web está seguindo os passos abaixo. Por hora, utilizamos EXPO para fazer a aplicação Android,
 que é a pasta filaHospitalarApp
 
-### 1. Instalação e Configuração
-### Passo 1: Clonar o Repositório
+Introdução
+Esta documentação tem como objetivo orientar o usuário na instalação, configuração e utilização do aplicativo Fila Hospitalar, tanto na versão web quanto na versão mobile para Android. O aplicativo permite que usuários visualizem informações sobre hospitais e filas de atendimento, bem como gerenciem seus perfis.
+
+Pré-requisitos
+Para utilizar o aplicativo, você precisará ter os seguintes softwares instalados:
+
+Node.js (versão 14 ou superior)
+npm (gerenciador de pacotes do Node.js)
+Git
+PostgreSQL (versão 12 ou superior)
+Expo CLI (para a versão mobile)
+Emulador Android ou dispositivo físico com Android (para a versão mobile)
+
+Utilização via Web
+3.1. Instalação e Configuração
+Passo 1: Clonar o Repositório
+Abra o terminal e execute:
 
 
-git clone https://github.com/seu-usuario/filaHospitalar.git
+git clone git@github.com:ogatalars/projectopdi-filaHospitalar.git
 
-### Passo 2: Instalar as Dependências
 
-No diretório raiz do projeto, execute:
+Navegue até o diretório do projeto:
+
+
+cd fila-hospitalar
+
+Passo 2: Instalar as Dependências
+Instale as dependências do projeto:
 
 
 npm install
-### Passo 3: Configurar o Banco de Dados
+Passo 3: Configurar o Banco de Dados
+Criar Usuário e Banco de Dados:
 
-Certifique-se de que o PostgreSQL está instalado e em execução.
-Crie um banco de dados chamado fila_hospitalar.
-Crie um usuário com acesso ao banco de dados:
+Conecte-se ao PostgreSQL como superusuário:
 
+
+psql -U postgres
+
+Execute:
 
 CREATE USER fila_user WITH PASSWORD 'sua_senha';
 CREATE DATABASE fila_hospitalar OWNER fila_user;
 GRANT ALL PRIVILEGES ON DATABASE fila_hospitalar TO fila_user;
-Passo 4: Configurar Variáveis de Ambiente
 
-Crie um arquivo .env na raiz do projeto com o seguinte conteúdo:
+Importante: Substitua 'sua_senha' por uma senha segura de sua escolha.
 
+Configurar as Variáveis de Ambiente:
 
-PORT=3000
+Crie um arquivo .env na raiz do projeto com:
+
+env
+Copiar código
 DB_HOST=localhost
 DB_PORT=5432
 DB_USERNAME=fila_user
 DB_PASSWORD=sua_senha
-DB_DATABASE=fila_hospitalar
+DB_NAME=fila_hospitalar
 JWT_SECRET=sua_chave_secreta
-Substitua sua_senha e sua_chave_secreta pelas suas credenciais.
+Importante: Substitua sua_senha e sua_chave_secreta pelos valores correspondentes.
 
-### 3.2. Executando o Projeto
-Modo de Desenvolvimento
+Passo 4: Executar Migrações e Inserir Dados Fictícios
 
-Use o seguinte comando para iniciar o servidor em modo de desenvolvimento:
+Executar Migrações:
+
+
+npm run typeorm migration:run
+Inserir Dados Fictícios:
+
+Conecte-se ao banco de dados:
+
+
+psql -U fila_user -d fila_hospitalar
+Insira os dados:
+
+INSERT INTO hospital (nome, endereco, telefone) VALUES
+('Hospital Central', 'Rua Principal, 100', '(11) 1234-5678'),
+('Clínica São José', 'Avenida Secundária, 200', '(11) 2345-6789'),
+('Hospital Municipal', 'Praça da Liberdade, 300', '(11) 3456-7890');
+
+INSERT INTO queue ("tempoEspera", "pacientesNaFila", "hospitalId") VALUES
+(30, 5, 1),
+(45, 8, 2),
+(20, 3, 3);
+Saia do console do PostgreSQL:
+
+\q
+3.2. Executando o Servidor
+Inicie o servidor:
 
 
 npm run dev
-Isso usará o nodemon para reiniciar o servidor automaticamente quando houver alterações.
+O servidor estará rodando em http://localhost:3000.
 
-Modo de Produção
-
-Compile o projeto e inicie o servidor:
-
-
-npm run build
-npm start
-
-
-### 3.3. Usando a Aplicação
-Acessar a Aplicação
-
+3.3. Acessando a Aplicação Web
 Abra o navegador e acesse:
 
-
-
 http://localhost:3000/
-Registrar um Usuário
 
-Acesse http://localhost:3000/register.html.
-Preencha os campos e clique em "Cadastrar".
-Fazer Login
+3.4. Utilizando a Aplicação Web
+3.4.1. Cadastro de Usuário
+Clique em "Cadastre-se" na página inicial.
+Preencha o formulário com nome completo, e-mail e senha.
+Clique em "Cadastrar".
+3.4.2. Login
+Acesse a página de login em http://localhost:3000/login.html.
+Insira seu e-mail e senha.
+Clique em "Acessar".
+Você será redirecionado para a página de perfil.
+3.4.3. Perfil do Usuário
+Visualize suas informações pessoais.
+Edite seu nome ou atualize sua senha.
+Você pode deletar sua conta clicando em "Deletar Conta".
+3.4.4. Visualização de Hospitais
+Navegue para a página de hospitais clicando em "Hospitais" no menu.
+Veja a lista de hospitais disponíveis.
+Clique em "Ver Filas" para visualizar as informações de fila de um hospital.
+3.4.5. Visualização de Filas
+Na página de filas, você verá o tempo de espera estimado e o número de pacientes na fila.
+Use o menu para navegar de volta ou sair da aplicação.
 
-Acesse http://localhost:3000/login.html.
-Insira suas credenciais e clique em "Entrar".
-Visualizar Hospitais
 
-Após o login, acesse http://localhost:3000/hospitais.html.
-Visualize a lista de hospitais disponíveis.
-Visualizar Filas
+#### ANDROID -> VIA EXPO
+Utilização via Android
+4.1 Configuração do Ambiente React Native
+1. Instalar o Expo CLI
 
-Na página de hospitais, clique em "Ver Filas" para ver as filas de um hospital específico.
-Editar Perfil
+npm install -g expo-cli
 
-Acesse http://localhost:3000/profile.html.
-Edite seu nome ou senha e clique em "Atualizar".
-Deletar Conta
+2. Configurar Ambiente Android
+Emulador Android: Instale o Android Studio e configure um emulador.
+Dispositivo Físico: Ative a depuração USB no seu dispositivo e conecte-o ao computador.
 
-Na página de perfil, clique em "Deletar Conta".
-Confirme a ação na janela de confirmação.
-Logout
+4.2. Instalação e Configuração do Projeto Mobile
+1. Clonar o Repositório Mobile
+git clone git@github.com:ogatalars/projectopdi-filaHospitalar.git
 
-Clique em "Sair" no menu de navegação para encerrar a sessão.
+Navegue até o diretório:
 
-### 3.4. Considerações de Segurança
-Senhas e Tokens: As senhas são criptografadas usando bcryptjs. Tokens JWT são usados para autenticação.
-Proteção de Rotas: Rotas que requerem autenticação estão protegidas pelo middleware checkJwt.
-Variáveis de Ambiente: Nunca exponha suas variáveis de ambiente ou credenciais em repositórios públicos.
-3.5. Dependências Principais
+cd filaHospitalarApp
 
-- Back-end:
+2. Instalar Dependências
 
-Node.js
-Express.js
-TypeScript
-TypeORM
-PostgreSQL
-bcryptjs
-jsonwebtoken
+npm install
 
-- Front-end:
+3. Configurar o Endereço IP do Servidor
+No arquivo src/services/api.js, atualize o baseURL com o endereço IP da sua máquina na rede local:
 
-HTML5
-CSS3
-JavaScript
-Bootstrap 5
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://SEU_IP_LOCAL:3000',
+});
+
+export default api;
+Importante: Substitua SEU_IP_LOCAL pelo endereço IP da sua máquina. Para descobrir seu IP, você pode usar o comando ipconfig (Windows) ou ifconfig (Mac/Linux) no terminal.
+
+4.3. Executando o Aplicativo no Android
+1. Iniciar o Servidor Back-end
+Certifique-se de que o servidor está em execução:
+
+npm run dev
+
+2. Iniciar o Aplicativo Mobile
+No diretório do projeto mobile, execute:
+
+expo start
+
+3. Executar no Emulador ou Dispositivo Físico
+Emulador Android:
+
+Pressione a no terminal do Expo para abrir o aplicativo no emulador.
+
+Dispositivo Físico:
+
+Instale o aplicativo Expo Go no seu dispositivo.
+Certifique-se de que o dispositivo e o computador estão na mesma rede Wi-Fi.
+Escaneie o QR Code exibido no terminal ou na página do Expo.
+
+4.4. Utilizando o Aplicativo Mobile
+1. Tela de Login
+Abra o aplicativo.
+Insira seu e-mail e senha.
+Toque em "Acessar".
+Caso não tenha uma conta, toque em "Cadastre-se".
+2. Tela de Cadastro
+Preencha seu nome completo, e-mail e senha.
+Toque em "Cadastrar".
+Após o cadastro, você será redirecionado para a tela de login.
+3. Tela de Perfil
+Visualize e edite suas informações pessoais.
+Atualize seu nome ou senha.
+Para deletar sua conta, toque em "Deletar Conta".
+Navegue para a lista de hospitais tocando em "Hospitais".
+4. Lista de Hospitais
+Veja a lista de hospitais disponíveis.
+Toque em um hospital para ver detalhes.
+5. Detalhes da Fila
+Visualize o tempo de espera e o número de pacientes na fila.
+Volte para a lista de hospitais ou para o perfil usando a navegação.
